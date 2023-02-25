@@ -17,11 +17,22 @@ const openai = new OpenAIApi(configuration);
 
 const port = process.env.PORT || 3000;
 
-app.get("/", (req: any, res: any) => {
+app.all("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://chatgpt-quoctang.netlify.app/");
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With",
+    "Content-Type"
+  );
+  next();
+});
+
+app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.post("/", async (req: any, res: any) => {
+app.post("/", async (req, res) => {
   const { message } = req.body;
 
   const response = await openai.createCompletion({
@@ -38,5 +49,5 @@ app.post("/", async (req: any, res: any) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
+  // console.log(`Server started on port ${port}`);
 });
