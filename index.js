@@ -18,7 +18,7 @@ const openai = new OpenAIApi(configuration);
 const port = process.env.PORT || 3000;
 
 app.all("*", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://chatgpt-quoctang.netlify.app/");
+  res.header("Access-Control-Allow-Origin", "https://chatgpt-quoctang.netlify.app");
   res.header("Access-Control-Allow-Methods", "GET, POST");
   res.header(
     "Access-Control-Allow-Headers",
